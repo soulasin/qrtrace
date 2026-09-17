@@ -11,7 +11,8 @@
     "server": "node server/index.cjs",
     "server:dev": "node --watch server/index.cjs",
     "db:seed": "node server/seed.cjs",
-    "db:reset": "node server/seed.cjs"
+    "db:reset": "node server/seed.cjs",
+    "start": "node server/index.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",

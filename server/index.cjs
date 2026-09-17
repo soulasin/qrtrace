@@ -5,6 +5,7 @@ const cors = require('cors')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { v4: uuidv4 } = require('uuid')
+const path = require('path')
 
 const db = require('./db.cjs')
 const { requireAuth, JWT_SECRET } = require('./middleware/auth.cjs')
@@ -937,7 +938,17 @@ app.get('/api/dashboard', requireAuth, (req, res) => {
     }
   })
 })
+const distPath = path.join(__dirname, '..', 'dist')
 
+app.use(express.static(distPath))
+
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    return next()
+  }
+
+  res.sendFile(path.join(distPath, 'index.html'))
+})
 // ==========================================
 // 404
 // ==========================================
