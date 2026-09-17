@@ -41,3 +41,7 @@ data/*.db-wal
 *.log
 npm-debug.log*
 backup_before_lao_*/
+
+# Local deployment helpers and backups
+prepare_production.sh
+server/index.cjs.backup_*
