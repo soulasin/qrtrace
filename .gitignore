@@ -40,3 +40,4 @@ data/*.db-wal
 # Logs
 *.log
 npm-debug.log*
+backup_before_lao_*/
