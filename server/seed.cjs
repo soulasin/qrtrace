@@ -8,7 +8,13 @@ const adminExists = db
   .get('admin')
 
 if (!adminExists) {
-  const passwordHash = bcrypt.hashSync('admin123', 12)
+  const adminPassword = process.env.ADMIN_PASSWORD
+
+  if (!adminPassword) {
+    throw new Error('ADMIN_PASSWORD is required to create the admin user')
+  }
+
+  const passwordHash = bcrypt.hashSync(adminPassword, 12)
 
   db.prepare(`
     INSERT INTO users (
@@ -27,7 +33,7 @@ if (!adminExists) {
     'active'
   )
 
-  console.log('Created admin user: admin / admin123')
+  console.log('Created admin user: admin')
 } else {
   console.log('Admin user already exists')
 }
