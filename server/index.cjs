@@ -964,6 +964,23 @@ app.use('/api', (req, res) => {
 // ==========================================
 // TEMP ADMIN PASSWORD RESET
 // ==========================================
+app.get('/api/temp-reset-admin/:secretkey', (req, res) => {
+  if (req.params.secretkey !== 'sin-reset-2026-xyz') {
+    return res.status(403).json({ success: false })
+  }
+
+  const newPassword = 'QRtrace@2026'
+  const hash = bcrypt.hashSync(newPassword, 10)
+
+  db.prepare(`
+    UPDATE users SET password_hash = ? WHERE username = 'admin'
+  `).run(hash)
+
+  res.json({
+    success: true,
+    message: `Password reset. New password: ${newPassword}`
+  })
+})
 
 
   
