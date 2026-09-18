@@ -965,8 +965,6 @@ app.use('/api', (req, res) => {
 // TEMP ADMIN PASSWORD RESET
 // ==========================================
 
-if (process.env.RESET_ADMIN_PASSWORD === 'true') {
-  const password = process.env.ADMIN_PASSWORD
 
   if (!password) {
     throw new Error(
