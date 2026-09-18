@@ -949,6 +949,19 @@ app.use((req, res, next) => {
 
   res.sendFile(path.join(distPath, 'index.html'))
 })
+app.get('/api/dashboard', requireAuth, (req, res) => {
+  ...
+  res.json({
+    success: true,
+    data: {
+      products,
+      categories,
+      qrCodes,
+      scans
+    }
+  })
+})
+
 // ==========================================
 // 404
 // ==========================================
@@ -964,7 +977,7 @@ app.use('/api', (req, res) => {
 // ==========================================
 // TEMP ADMIN PASSWORD RESET
 // ==========================================
-app.get('/api/temp-reset-admin/:secretkey', (req, res) => {
+ app.get('/api/temp-reset-admin/:secretkey', (req, res) => {
   if (req.params.secretkey !== 'sin-reset-2026-xyz') {
     return res.status(403).json({ success: false })
   }
@@ -982,8 +995,6 @@ app.get('/api/temp-reset-admin/:secretkey', (req, res) => {
   })
 })
 
-
-  
 // ==========================================
 // START
 // ==========================================
